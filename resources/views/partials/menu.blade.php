@@ -45,6 +45,16 @@
                 </li>
             @endcan
 
+            @can('todo_category_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.todo-categories.index") }}" class="nav-link {{ request()->is('admin/todo-categories') || request()->is('admin/todo-categories/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-list nav-icon">
+
+                        </i>
+                        {{ trans('cruds.todoCategory.title') }}
+                    </a>
+                </li>
+            @endcan
             @can('expense_category_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.expense-categories.index") }}" class="nav-link {{ request()->is('admin/expense-categories') || request()->is('admin/expense-categories/*') ? 'active' : '' }}">
@@ -62,6 +72,16 @@
 
                         </i>
                         {{ trans('cruds.incomeCategory.title') }}
+                    </a>
+                </li>
+            @endcan
+            @can('todo_list_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.todo.index") }}" class="nav-link {{ request()->is('admin/todo') || request()->is('admin/todo/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-arrow-circle-right nav-icon">
+
+                        </i>
+                        {{ trans('cruds.todo.title') }}
                     </a>
                 </li>
             @endcan

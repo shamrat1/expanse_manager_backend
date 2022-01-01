@@ -22,6 +22,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('expense-categories/destroy', 'ExpenseCategoryController@massDestroy')->name('expense-categories.massDestroy');
     Route::resource('expense-categories', 'ExpenseCategoryController');
 
+    // TodoCategories
+    Route::delete('todo-categories/destroy', 'TodoCategoryController@massDestroy')->name('todo-categories.massDestroy');
+    Route::resource('todo-categories', 'TodoCategoryController');
+
+    // Todo
+    Route::delete('todo/destroy', 'TodoController@massDestroy')->name('todo.massDestroy');
+    Route::resource('todo', 'TodoController');
+
     // Incomecategories
     Route::delete('income-categories/destroy', 'IncomeCategoryController@massDestroy')->name('income-categories.massDestroy');
     Route::resource('income-categories', 'IncomeCategoryController');
