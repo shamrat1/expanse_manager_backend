@@ -17,10 +17,10 @@ class CreateTodoCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('color');
-            $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('created_by_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('created_by','created_by_foreign')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -32,7 +32,7 @@ class CreateTodoCategoriesTable extends Migration
     public function down()
     {
         Schema::table("todo_categories",function(Blueprint $table){
-            $table->dropForeign('created_by_foreign');
+            $table->dropForeign('todo_categories_created_by_id_foreign');
         });
         Schema::dropIfExists('todo_categories');
     }

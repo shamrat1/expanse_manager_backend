@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-@can('role_create')
+@can('todo_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.roles.create") }}">
+            <a class="btn btn-success" href="{{ route("admin.todo.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.todo.title_singular') }}
             </a>
         </div>
@@ -59,19 +59,19 @@
                                 {{ $todo->category->name ?? '' }}
                             </td>
                             <td>
-                                @can('role_show')
+                                @can('todo_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.todo.show', $todo->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('role_edit')
+                                @can('todo_edit')
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.todo.edit', $todo->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('role_delete')
+                                @can('todo_delete')
                                     <form action="{{ route('admin.todo.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

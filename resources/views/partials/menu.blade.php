@@ -45,7 +45,7 @@
                 </li>
             @endcan
 
-            @can('todo_category_access')
+            @can('todo_categories_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.todo-categories.index") }}" class="nav-link {{ request()->is('admin/todo-categories') || request()->is('admin/todo-categories/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-list nav-icon">
@@ -75,7 +75,7 @@
                     </a>
                 </li>
             @endcan
-            @can('todo_list_access')
+            @can('todo_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.todo.index") }}" class="nav-link {{ request()->is('admin/todo') || request()->is('admin/todo/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-arrow-circle-right nav-icon">

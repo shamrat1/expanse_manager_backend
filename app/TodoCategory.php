@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\MultiTenantModelTrait;
 
 class TodoCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, MultiTenantModelTrait;
 
     protected $fillable = [
         'name','color','created_by'
