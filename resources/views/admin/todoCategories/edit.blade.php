@@ -1,18 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.todoCategory.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.todo-categories.update", [$cat->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.todo-categories.update', $cat->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group {{ $errors->has('task') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('cruds.todoCategory.fields.name') }}*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($cat) ? $cat->task : '') }}" required>
+                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($cat) ? $cat->name : '') }}" required>
                 @if($errors->has('name'))
                     <em class="invalid-feedback">
                         {{ $errors->first('name') }}

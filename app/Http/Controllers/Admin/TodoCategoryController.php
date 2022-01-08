@@ -35,19 +35,21 @@ class TodoCategoryController extends Controller
         return redirect()->route('admin.todo-categories.index');
     }
 
-    public function edit(Request $request,TodoCategory $cat)
+    public function edit(Request $request,$id)
     {
         abort_if(Gate::denies('todo_categories_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $cat = TodoCategory::find($id);
         return view('admin.todoCategories.edit', compact('cat'));
     }
 
-    public function update(Request $request, TodoCategory $cat)
+    public function update(Request $request, $id)
     {
         abort_if(Gate::denies('todo_categories_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $request->validate([
             "name" => "required|string",
             "color" => "required|string",
         ]);
+        $cat = TodoCategory::find($id);
         $cat->update($request->all());
         return redirect()->route('admin.todo-categories.index');
     }

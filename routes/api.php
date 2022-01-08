@@ -1,5 +1,15 @@
 <?php
 
+// Route::get('/v1/api/login', '');
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['guest']], function () {
+    Route::post('login', 'AuthenticationController@login');
+    Route::post('register', 'AuthenticationController@register');
+});
+
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['auth:api']], function () {
+    Route::post('logout', 'AuthenticationController@logout');
+});
+
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
     // Permissions
     Route::apiResource('permissions', 'PermissionsApiController');
