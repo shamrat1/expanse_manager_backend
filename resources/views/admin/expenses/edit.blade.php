@@ -10,16 +10,16 @@
         <form action="{{ route("admin.expenses.update", [$expense->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="form-group {{ $errors->has('expense_category_id') ? 'has-error' : '' }}">
+            <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                 <label for="expense_category">{{ trans('cruds.expense.fields.expense_category') }}</label>
-                <select name="expense_category_id" id="expense_category" class="form-control select2">
+                <select name="category_id" id="expense_category" class="form-control select2">
                     @foreach($expense_categories as $id => $expense_category)
                         <option value="{{ $id }}" {{ (isset($expense) && $expense->expense_category ? $expense->expense_category->id : old('expense_category_id')) == $id ? 'selected' : '' }}>{{ $expense_category }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('expense_category_id'))
+                @if($errors->has('category_id'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('expense_category_id') }}
+                        {{ $errors->first('category_id') }}
                     </em>
                 @endif
             </div>

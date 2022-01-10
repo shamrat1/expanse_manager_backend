@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyIncomeRequest;
 use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Income;
-use App\IncomeCategory;
+use App\Category;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +27,7 @@ class IncomeController extends Controller
     {
         abort_if(Gate::denies('income_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $income_categories = IncomeCategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $income_categories = Category::where('type','income')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.incomes.create', compact('income_categories'));
     }
@@ -43,7 +43,7 @@ class IncomeController extends Controller
     {
         abort_if(Gate::denies('income_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $income_categories = IncomeCategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $income_categories = Category::where('type','income')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $income->load('income_category', 'created_by');
 

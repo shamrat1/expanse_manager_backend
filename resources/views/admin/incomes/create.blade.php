@@ -9,16 +9,16 @@
     <div class="card-body">
         <form action="{{ route("admin.incomes.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group {{ $errors->has('income_category_id') ? 'has-error' : '' }}">
+            <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                 <label for="income_category">{{ trans('cruds.income.fields.income_category') }}</label>
-                <select name="income_category_id" id="income_category" class="form-control select2">
+                <select name="category_id" id="income_category" class="form-control select2">
                     @foreach($income_categories as $id => $income_category)
                         <option value="{{ $id }}" {{ (isset($income) && $income->income_category ? $income->income_category->id : old('income_category_id')) == $id ? 'selected' : '' }}>{{ $income_category }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('income_category_id'))
+                @if($errors->has('category_id'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('income_category_id') }}
+                        {{ $errors->first('category_id') }}
                     </em>
                 @endif
             </div>

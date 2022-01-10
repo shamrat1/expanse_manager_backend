@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodoCategoriesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,21 @@ class CreateTodoCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('todo_categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('color');
+
+            $table->string('name')->nullable();
+
+            $table->string('type'); // income, expanse and todo
+
             $table->unsignedInteger('created_by_id')->nullable();
+
             $table->timestamps();
 
-            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
+
         });
+        
     }
 
     /**
@@ -31,9 +37,6 @@ class CreateTodoCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table("todo_categories",function(Blueprint $table){
-            $table->dropForeign('todo_categories_created_by_id_foreign');
-        });
-        Schema::dropIfExists('todo_categories');
+        Schema::dropIfExists('categories');
     }
 }

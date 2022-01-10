@@ -28,12 +28,12 @@ class Expense extends Model
         'deleted_at',
         'description',
         'created_by_id',
-        'expense_category_id',
+        'category_id',
     ];
 
     public function expense_category()
     {
-        return $this->belongsTo(ExpenseCategory::class, 'expense_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function getEntryDateAttribute($value)

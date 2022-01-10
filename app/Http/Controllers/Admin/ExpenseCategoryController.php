@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ExpenseCategory;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyExpenseCategoryRequest;
 use App\Http\Requests\StoreExpenseCategoryRequest;
@@ -17,7 +17,7 @@ class ExpenseCategoryController extends Controller
     {
         abort_if(Gate::denies('expense_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expenseCategories = ExpenseCategory::all();
+        $expenseCategories = Category::where('type','expanse')->get();
 
         return view('admin.expenseCategories.index', compact('expenseCategories'));
     }
@@ -31,12 +31,14 @@ class ExpenseCategoryController extends Controller
 
     public function store(StoreExpenseCategoryRequest $request)
     {
-        $expenseCategory = ExpenseCategory::create($request->all());
+        $data = $request->all();
+        $data["type"] = "expanse";
+        $expenseCategory = Category::create($data);
 
         return redirect()->route('admin.expense-categories.index');
     }
 
-    public function edit(ExpenseCategory $expenseCategory)
+    public function edit(Category $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -45,14 +47,14 @@ class ExpenseCategoryController extends Controller
         return view('admin.expenseCategories.edit', compact('expenseCategory'));
     }
 
-    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateExpenseCategoryRequest $request, Category $expenseCategory)
     {
         $expenseCategory->update($request->all());
 
         return redirect()->route('admin.expense-categories.index');
     }
 
-    public function show(ExpenseCategory $expenseCategory)
+    public function show(Category $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -61,7 +63,7 @@ class ExpenseCategoryController extends Controller
         return view('admin.expenseCategories.show', compact('expenseCategory'));
     }
 
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy(Category $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -72,7 +74,7 @@ class ExpenseCategoryController extends Controller
 
     public function massDestroy(MassDestroyExpenseCategoryRequest $request)
     {
-        ExpenseCategory::whereIn('id', request('ids'))->delete();
+        Category::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

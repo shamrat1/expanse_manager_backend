@@ -9,9 +9,9 @@ class AddRelationshipFieldsToIncomesTable extends Migration
     public function up()
     {
         Schema::table('incomes', function (Blueprint $table) {
-            $table->unsignedInteger('income_category_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
 
-            $table->foreign('income_category_id', 'income_category_fk_334997')->references('id')->on('income_categories');
+            $table->foreign('category_id', 'income_category_fk_334997')->references('id')->on('categories');
 
             $table->unsignedInteger('created_by_id')->nullable();
 

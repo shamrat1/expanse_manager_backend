@@ -28,12 +28,12 @@ class Income extends Model
         'deleted_at',
         'description',
         'created_by_id',
-        'income_category_id',
+        'category_id',
     ];
 
     public function income_category()
     {
-        return $this->belongsTo(IncomeCategory::class, 'income_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function getEntryDateAttribute($value)

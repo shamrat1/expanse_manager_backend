@@ -24,14 +24,14 @@
             </div>
             <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
                 <label for="permissions">{{ trans('cruds.todo.fields.category') }}</label>
-                <select name="category" id="category" class="form-control select2">
+                <select name="category_id" id="category" class="form-control select2">
                     @foreach($categories as $id => $category)
-                        <option value="{{ $id }}" {{ old('category', isset($todo) ? $todo->todo_category_id : '') == $id ? 'selected' : '' }}>{{ $category }}</option>
+                        <option value="{{ $id }}" {{ old('category_id', isset($todo) ? $todo->todo_category_id : '') == $id ? 'selected' : '' }}>{{ $category }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('category'))
+                @if($errors->has('category_id'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('category') }}
+                        {{ $errors->first('category_id') }}
                     </em>
                 @endif
                 <p class="helper-block">

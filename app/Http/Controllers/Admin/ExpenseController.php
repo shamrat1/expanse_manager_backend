@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Expense;
-use App\ExpenseCategory;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyExpenseRequest;
 use App\Http\Requests\StoreExpenseRequest;
@@ -27,7 +27,7 @@ class ExpenseController extends Controller
     {
         abort_if(Gate::denies('expense_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expense_categories = ExpenseCategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $expense_categories = Category::where('type','expanse')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.expenses.create', compact('expense_categories'));
     }
@@ -43,7 +43,7 @@ class ExpenseController extends Controller
     {
         abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expense_categories = ExpenseCategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $expense_categories = Category::where('type','expanse')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $expense->load('expense_category', 'created_by');
 

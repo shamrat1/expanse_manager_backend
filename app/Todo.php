@@ -12,7 +12,7 @@ class Todo extends Model
     use HasFactory, MultiTenantModelTrait;
 
     protected $fillable = [
-        'todo_category_id',
+        'category_id',
         'task',
         'note',
         'reminder_at',
@@ -26,6 +26,6 @@ class Todo extends Model
 
     public function category()
     {
-        return $this->belongsTo(TodoCategory::class, 'todo_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

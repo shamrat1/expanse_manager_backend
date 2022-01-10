@@ -15,7 +15,7 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('todo_category_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->string('task');
             $table->string('note')->nullable();
             $table->dateTime('reminder_at')->nullable();
@@ -23,7 +23,7 @@ class CreateTodosTable extends Migration
             $table->timestamps();
 
             $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('todo_category_id')->references('id')->on('todo_categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -36,7 +36,7 @@ class CreateTodosTable extends Migration
     {
         Schema::table("todos",function(Blueprint $table){
             $table->dropForeign('todos_created_by_id_foreign');
-            $table->dropForeign('todos_todo_category_id_foreign');
+            $table->dropForeign('todos_category_id_foreign');
         });
         Schema::dropIfExists('todos');
     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
 use App\Todo;
-use App\TodoCategory;
+use App\Category;
 
 class TodoController extends Controller
 {
@@ -22,7 +22,7 @@ class TodoController extends Controller
     public function create()
     {
         abort_if(Gate::denies('todo_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories = TodoCategory::all()->pluck('name','id')->prepend(trans('global.pleaseSelect'), '');
+        $categories = Category::where('type','todo')->get()->pluck('name','id')->prepend(trans('global.pleaseSelect'), '');
         return view('admin.todos.create', compact('categories'));
     }
 
@@ -39,7 +39,7 @@ class TodoController extends Controller
     public function edit(Request $request,Todo $todo)
     {
         abort_if(Gate::denies('todo_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories = TodoCategory::all()->pluck('name','id')->prepend(trans('global.pleaseSelect'), '');
+        $categories = Category::where('type','todo')->get()->pluck('name','id')->prepend(trans('global.pleaseSelect'), '');
         return view('admin.todos.edit', compact('categories','todo'));
     }
 

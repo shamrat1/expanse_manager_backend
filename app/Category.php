@@ -2,15 +2,16 @@
 
 namespace App;
 
-use App\Traits\MultiTenantModelTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\MultiTenantModelTrait;
 
-class ExpenseCategory extends Model
+class Category extends Model
 {
     use SoftDeletes, MultiTenantModelTrait;
 
-    public $table = 'expense_categories';
+    public $table = 'categories';
 
     protected $dates = [
         'created_at',
@@ -20,6 +21,8 @@ class ExpenseCategory extends Model
 
     protected $fillable = [
         'name',
+        'color',
+        'type',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -28,7 +31,17 @@ class ExpenseCategory extends Model
 
     public function expenses()
     {
-        return $this->hasMany(Expense::class, 'expense_category_id', 'id');
+        return $this->hasMany(Expense::class, 'category_id', 'id');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class, 'income_category_id', 'id');
+    }
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class, 'category_id', 'id');
     }
 
     public function created_by()
