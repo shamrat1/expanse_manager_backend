@@ -27,8 +27,8 @@ class AuthenticationController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken($this->tokenClient)->accessToken;
-                $response = ['token' => $token];
-                return response()->json($response, 422);
+                $user['token'] = $token;
+                return response()->json($user, 200);
             } else {
                 $response = ["message" => "Password mismatch"];
                 return response()->json($response, 422);
