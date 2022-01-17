@@ -26,6 +26,12 @@ class StoreExpenseRequest extends FormRequest
             'amount'     => [
                 'required',
             ],
+            'category_id' => [
+                'nullable', 'exists:categories,id',
+            ],
+            'description' => [
+                'nullable', 'string'
+            ],
         ];
     }
 }

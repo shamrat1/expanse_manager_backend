@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\ExpenseCategory;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseCategoryRequest;
 use App\Http\Requests\UpdateExpenseCategoryRequest;
@@ -17,7 +17,7 @@ class ExpenseCategoryApiController extends Controller
     {
         abort_if(Gate::denies('expense_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseCategoryResource(ExpenseCategory::with(['created_by'])->get());
+        return new ExpenseCategoryResource(Category::where("type","expanse")->with(['created_by'])->get());
     }
 
     public function store(StoreExpenseCategoryRequest $request)

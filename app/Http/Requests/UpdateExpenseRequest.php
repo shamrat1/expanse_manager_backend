@@ -11,7 +11,7 @@ class UpdateExpenseRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -25,6 +25,12 @@ class UpdateExpenseRequest extends FormRequest
             ],
             'amount'     => [
                 'required',
+            ],
+            'category_id' => [
+                'nullable', 'exists:categories,id',
+            ],
+            'description' => [
+                'nullable', 'string'
             ],
         ];
     }

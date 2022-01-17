@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIncomeCategoryRequest;
 use App\Http\Requests\UpdateIncomeCategoryRequest;
 use App\Http\Resources\Admin\IncomeCategoryResource;
-use App\IncomeCategory;
+use App\Category;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class IncomeCategoryApiController extends Controller
     {
         abort_if(Gate::denies('income_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IncomeCategoryResource(IncomeCategory::with(['created_by'])->get());
+        return new IncomeCategoryResource(Category::where("type","income")->with(['created_by'])->get());
     }
 
     public function store(StoreIncomeCategoryRequest $request)
