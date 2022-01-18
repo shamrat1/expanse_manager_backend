@@ -7,10 +7,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'm
 });
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['auth:api']], function () {
+    // Home
+    Route::get('/home','HomeController@index');
+    
     Route::post('logout', 'AuthenticationController@logout');
 });
-
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
+
     // Permissions
     Route::apiResource('permissions', 'PermissionsApiController');
 

@@ -17,12 +17,14 @@ class ExpenseApiController extends Controller
     {
         abort_if(Gate::denies('expense_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseResource(Expense::with(['expense_category', 'created_by'])->paginate(20));
+        return new ExpenseResource(Expense::with(['category', 'created_by'])->paginate(20));
     }
 
     public function store(StoreExpenseRequest $request)
     {
-        $expense = Expense::create($request->all());
+        $data = $request->all();
+        $data["created_by_id"] = auth('api')->id();
+        $expense = Expense::create($data);
 
         return (new ExpenseResource($expense))
             ->response()
@@ -33,7 +35,7 @@ class ExpenseApiController extends Controller
     {
         abort_if(Gate::denies('expense_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseResource($expense->load(['expense_category', 'created_by']));
+        return new ExpenseResource($expense->load(['category', 'created_by']));
     }
 
     public function update(UpdateExpenseRequest $request, Expense $expense)

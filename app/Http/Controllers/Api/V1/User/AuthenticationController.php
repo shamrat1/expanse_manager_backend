@@ -26,8 +26,10 @@ class AuthenticationController extends Controller
         $user = User::where('email', $request->email)->first();
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
+
                 $token = $user->createToken($this->tokenClient)->accessToken;
                 $user['token'] = $token;
+
                 return response()->json($user, 200);
             } else {
                 $response = ["message" => "Password mismatch"];

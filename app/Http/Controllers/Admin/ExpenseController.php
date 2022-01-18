@@ -45,7 +45,7 @@ class ExpenseController extends Controller
 
         $expense_categories = Category::where('type','expanse')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $expense->load('expense_category', 'created_by');
+        $expense->load('category', 'created_by');
 
         return view('admin.expenses.edit', compact('expense_categories', 'expense'));
     }
@@ -61,7 +61,7 @@ class ExpenseController extends Controller
     {
         abort_if(Gate::denies('expense_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expense->load('expense_category', 'created_by');
+        $expense->load('category', 'created_by');
 
         return view('admin.expenses.show', compact('expense'));
     }

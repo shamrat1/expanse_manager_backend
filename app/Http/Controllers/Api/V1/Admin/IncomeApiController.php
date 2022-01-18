@@ -22,7 +22,9 @@ class IncomeApiController extends Controller
 
     public function store(StoreIncomeRequest $request)
     {
-        $income = Income::create($request->all());
+        $data = $request->all();
+        $data["created_by_id"] = auth('api')->id();
+        $income = Income::create($data);
 
         return (new IncomeResource($income))
             ->response()

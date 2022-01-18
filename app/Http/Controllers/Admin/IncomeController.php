@@ -45,7 +45,7 @@ class IncomeController extends Controller
 
         $income_categories = Category::where('type','income')->get()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $income->load('income_category', 'created_by');
+        $income->load('category', 'created_by');
 
         return view('admin.incomes.edit', compact('income_categories', 'income'));
     }
@@ -61,7 +61,7 @@ class IncomeController extends Controller
     {
         abort_if(Gate::denies('income_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $income->load('income_category', 'created_by');
+        $income->load('category', 'created_by');
 
         return view('admin.incomes.show', compact('income'));
     }

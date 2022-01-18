@@ -31,7 +31,7 @@ class Income extends Model
         'category_id',
     ];
 
-    public function income_category()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

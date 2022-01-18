@@ -36,7 +36,7 @@ class Category extends Model
 
     public function incomes()
     {
-        return $this->hasMany(Income::class, 'income_category_id', 'id');
+        return $this->hasMany(Income::class, 'category_id', 'id');
     }
 
     public function todos()
