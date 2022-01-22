@@ -22,21 +22,21 @@ class ExpenseCategoryApiController extends Controller
 
     public function store(StoreExpenseCategoryRequest $request)
     {
-        $expenseCategory = ExpenseCategory::create($request->all());
+        $expenseCategory = Category::create($request->all());
 
         return (new ExpenseCategoryResource($expenseCategory))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(ExpenseCategory $expenseCategory)
+    public function show(Category $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new ExpenseCategoryResource($expenseCategory->load(['created_by']));
     }
 
-    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateExpenseCategoryRequest $request, Category $expenseCategory)
     {
         $expenseCategory->update($request->all());
 
@@ -45,7 +45,7 @@ class ExpenseCategoryApiController extends Controller
             ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy(Category $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
