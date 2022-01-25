@@ -45,4 +45,17 @@ class CategoryController extends Controller
 
         return response()->json("Category Updated Successfully");
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $cat = Category::findOrFail($id);
+        $user = auth('api')->id();
+
+        if($cat->created_by_id == $user){
+            $cat->delete();
+            return response()->json("Category Deleted successfully.",200);
+        }else{
+            return response()->json("Operation not allowed.",422);
+        }
+    }
 }

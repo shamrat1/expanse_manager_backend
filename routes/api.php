@@ -11,6 +11,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'm
     Route::get('/home','HomeController@index');
 
     Route::apiResource('categories',"CategoryController");
+    Route::apiResource('todo',"TodoController");
 
     Route::post('logout', 'AuthenticationController@logout');
 });

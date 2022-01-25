@@ -16,7 +16,8 @@ class Todo extends Model
         'task',
         'note',
         'reminder_at',
-        'created_by'
+        'created_by',
+        'completed'
     ];
 
     public function user()
