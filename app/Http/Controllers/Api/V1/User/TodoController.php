@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Todo;
+use Carbon\Carbon;
 
 class TodoController extends Controller
 {
@@ -18,15 +19,18 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "category_id" => "nullable|numeric|exists:category,id",
+            "category_id" => "nullable|numeric|exists:categories,id",
             "task" => "required|string",
             "note" => "nullable|string",
             "reminder_at" => "nullable|string"
         ]);
         $userId = auth('api')->id();
         $data = $request->all();
+        if($request->has('reminder_at')){
+            $data['reminder_at'] = Carbon::parse($request->reminder_at);
+        }
         $data['created_by_id'] = $userId;
-        todo::create($data);
+        Todo::create($data);
 
         return response()->json("Task Created Successfully");
     }

@@ -1,8 +1,16 @@
 <?php
 
+use App\Expense;
+
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes();
+
+Route::get('/test',function(){
+    $income = 2000;
+    $expenses = Expense::get();
+    dd($expenses);
+});
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::redirect('/', '/admin/expenses');

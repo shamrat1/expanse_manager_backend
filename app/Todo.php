@@ -16,13 +16,13 @@ class Todo extends Model
         'task',
         'note',
         'reminder_at',
-        'created_by',
+        'created_by_id',
         'completed'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->belongsTo(User::class,'created_by_id');
     }
 
     public function category()
