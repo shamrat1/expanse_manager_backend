@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::when($request->type,function($q) use($request){
             $q->where('type',$request->type);
-        })->paginate(25);
+        })->paginate(25);   
 
         return response()->json($categories);
     }

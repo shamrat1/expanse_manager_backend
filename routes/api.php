@@ -12,7 +12,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'm
 
     Route::apiResource('categories',"CategoryController");
     Route::apiResource('todo',"TodoController");
-
+    Route::get("transactions/{type?}","TransactionController@index");
     Route::post('logout', 'AuthenticationController@logout');
 });
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
