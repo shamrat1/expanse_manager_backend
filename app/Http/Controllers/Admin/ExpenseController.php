@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyExpenseRequest;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Imports\ExpensesImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Exception;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -80,5 +83,24 @@ class ExpenseController extends Controller
         Expense::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function importView(){
+
+        return view('admin.expenses.import');
+    }
+    public function import(Request $request){
+
+        // dd($request->all());
+        $file = $request->file('file');
+        try{
+
+            Excel::import(new ExpensesImport, $file);
+            return back()->with("success","Expense Data Inserted Successfully!");
+        }
+        catch (Exception $e){
+            return back()->with("error",$e->getMessage());
+        }
+        return redirect()->route('admin.expenses.index');
     }
 }

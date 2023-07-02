@@ -6,6 +6,9 @@
             <a class="btn btn-success" href="{{ route("admin.expenses.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.expense.title_singular') }}
             </a>
+            <a class="btn btn-primary" href="{{route("admin.expenses.import") }}">
+                {{ trans('global.import') }} {{ trans('cruds.expense.title_singular') }}
+            </a>
         </div>
     </div>
 @endcan
