@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Exception;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExpenseController extends Controller
@@ -91,7 +93,7 @@ class ExpenseController extends Controller
     }
     public function import(Request $request){
 
-        // dd($request->all());
+
         $file = $request->file('file');
         try{
 
@@ -101,6 +103,6 @@ class ExpenseController extends Controller
         catch (Exception $e){
             return back()->with("error",$e->getMessage());
         }
-        return redirect()->route('admin.expenses.index');
+        // return redirect()->route('admin.expenses.index');
     }
 }
