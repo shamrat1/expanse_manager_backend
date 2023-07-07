@@ -41,6 +41,9 @@
                             {{ trans('cruds.expense.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('User') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -55,7 +58,7 @@
                                 {{ $expense->id ?? '' }}
                             </td>
                             <td>
-                                {{ $expense->expense_category->name ?? '' }}
+                                {{ $expense->category->name ?? '' }}
                             </td>
                             <td>
                                 {{ $expense->entry_date ?? '' }}
@@ -65,6 +68,9 @@
                             </td>
                             <td>
                                 {{ $expense->description ?? '' }}
+                            </td>
+                            <td>
+                                {{ $expense->user->name ?? '' }}
                             </td>
                             <td>
                                 @can('expense_show')
