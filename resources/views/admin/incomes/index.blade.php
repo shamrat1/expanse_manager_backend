@@ -6,6 +6,9 @@
             <a class="btn btn-success" href="{{ route("admin.incomes.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.income.title_singular') }}
             </a>
+            <a class="btn btn-primary" href="{{route("admin.income.import") }}">
+                {{ trans('global.import') }} {{ trans('cruds.income.title_singular') }}
+            </a>
         </div>
     </div>
 @endcan
@@ -52,7 +55,7 @@
                                 {{ $income->id ?? '' }}
                             </td>
                             <td>
-                                {{ $income->income_category->name ?? '' }}
+                                {{ $income->category->name ?? '' }}
                             </td>
                             <td>
                                 {{ $income->entry_date ?? '' }}

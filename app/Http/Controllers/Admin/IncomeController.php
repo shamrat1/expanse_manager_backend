@@ -8,8 +8,11 @@ use App\Http\Requests\StoreIncomeRequest;
 use App\Http\Requests\UpdateIncomeRequest;
 use App\Income;
 use App\Category;
+use App\Imports\IncomeImport;
+use Exception;
 use Gate;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Response;
 
 class IncomeController extends Controller
@@ -80,5 +83,24 @@ class IncomeController extends Controller
         Income::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function importView(){
+
+        return view('admin.incomes.import');
+    }
+    public function import(Request $request){
+
+
+        $file = $request->file('file');
+        try{
+
+            Excel::import(new IncomeImport, $file);
+            return back()->with("success","Income Data Inserted Successfully!");
+        }
+        catch (Exception $e){
+            return back()->with("error",$e->getMessage());
+        }
+        // return redirect()->route('admin.expenses.index');
     }
 }
