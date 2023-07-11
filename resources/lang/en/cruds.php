@@ -217,6 +217,7 @@ return [
             'total_payment'          =>'Total Payment',
             'quantity'               =>'Quantity',
             'customer'                =>'Customer',
+            'sale_file'               =>'Sale File',
         ],
     ],
     'expenseReport'     => [

@@ -15,8 +15,8 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-			$table->integer('user_id')->index('user_id_sales');
-			$table->date('date');
+			$table->integer('user_id')->nullable()->index('user_id_sales');
+			$table->date('date')->nullable();
 			$table->string('ref', 192)->nullable();
 			$table->integer('customer_id')->nullable()->index('sale_customer_id');
 			$table->integer('quantity')->nullable();

@@ -44,13 +44,13 @@
                             {{ trans('cruds.sale.fields.total_amount') }}
                         </th>
                         <th>
+                            {{ trans('cruds.sale.fields.discount') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.sale.fields.total_payment') }}
                         </th>
                         <th>
                             {{ trans('cruds.sale.fields.paid') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sale.fields.total_payment') }}
                         </th>
                         <th>
                             {{ trans('cruds.sale.fields.due') }}
@@ -76,6 +76,9 @@
                                 {{ $sale->customer->name ?? '' }}
                             </td>
                             <td>
+                                {{ $sale->quantity ?? '' }}
+                            </td>
+                            <td>
                                 {{ $sale->rate ?? '' }}
                             </td>
                             <td>
@@ -86,13 +89,15 @@
                             </td>
                             <td>
                                 {{ $sale->total_payment ?? '' }}
-                            </td><td>
+                            </td>
+                            <td>
                                 {{ $sale->paid ?? '' }}
                             </td>
                             <td>
-                                <td>
                                     {{ $sale->due ?? '' }}
-                                </td>
+                            </td>
+
+                            <td>
                                 {{-- @can('sale_show') --}}
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.sales.show', $sale->id) }}">
                                         {{ trans('global.view') }}

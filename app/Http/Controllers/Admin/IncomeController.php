@@ -86,7 +86,6 @@ class IncomeController extends Controller
     }
 
     public function importView(){
-
         return view('admin.incomes.import');
     }
     public function import(Request $request){

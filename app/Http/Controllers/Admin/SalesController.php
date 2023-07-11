@@ -91,11 +91,9 @@ class SalesController extends Controller
     }
 
     public function importView(){
-      dd("sdfds");
         return view('admin.sales.import');
     }
     public function import(Request $request){
-
 
         $file = $request->file('file');
         try{

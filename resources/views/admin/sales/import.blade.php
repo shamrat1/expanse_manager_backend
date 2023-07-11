@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.income.title_singular') }}
+        {{ trans('global.create') }} {{ trans('cruds.sale.title_singular') }}
     </div>
 
     <div class="card-body">
@@ -17,10 +17,10 @@
      {{ session('error') }}
          </div>
        @endif
-        <form action="{{ route("admin.income.import.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("admin.sales.import.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group {{ $errors->has('file') ? 'has-error' : '' }}">
-                <label for="file">{{ trans('cruds.expense.fields.income_file') }}*</label>
+                <label for="file">{{ trans('cruds.sale.fields.sale_file') }}*</label>
                 <input type="file" id="file" name="file" class="form-control" value="{{ old('file') }}" required>
             </div>
             <div>

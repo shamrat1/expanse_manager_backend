@@ -52,8 +52,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      // Sales
      Route::delete('sales/destroy', 'SalesController@massDestroy')->name('sales.massDestroy');
      Route::resource('sales', 'SalesController');
-     Route::get('sales/import', 'SalesController@importView')->name('sales.import');
-     Route::post('sales/import', 'SalesController@import')->name('sales.import.store');
+     Route::get('sale/import', 'SalesController@importView')->name('sales.import');
+     Route::post('sale/import', 'SalesController@import')->name('sales.import.store');
 
     // Incomes
     Route::delete('incomes/destroy', 'IncomeController@massDestroy')->name('incomes.massDestroy');
