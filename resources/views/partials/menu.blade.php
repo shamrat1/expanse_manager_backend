@@ -115,6 +115,17 @@
                 </a>
             </li>
         @endcan
+
+        @can('income_access')
+        <li class="nav-item">
+            <a href="{{ route("admin.purchases.index") }}" class="nav-link {{ request()->is('admin/incomes') || request()->is('admin/incomes/*') ? 'active' : '' }}">
+                <i class="fa-fw fas fa-arrow-circle-right nav-icon">
+
+                </i>
+                {{ trans('cruds.purchase.title') }}
+            </a>
+        </li>
+    @endcan
             @can('expense_report_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.expense-reports.index") }}" class="nav-link {{ request()->is('admin/expense-reports') || request()->is('admin/expense-reports/*') ? 'active' : '' }}">
