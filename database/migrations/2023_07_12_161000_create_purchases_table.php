@@ -15,6 +15,7 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+			$table->bigInteger('company_id')->nullable();
             $table->bigInteger('user_id')->nullable();
 			$table->date('date')->nullable();
 			$table->string('ref', 192)->nullable();
