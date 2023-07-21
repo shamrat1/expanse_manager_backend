@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\Api\V1\Admin\SalesApiController;
+// use Illuminate\Routing\Route;
 
 // Route::get('/v1/api/login', '');
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['guest']], function () {
@@ -8,11 +10,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'm
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['auth:api']], function () {
     // Home
-    Route::get('/home','HomeController@index');
+    Route::get('/home', 'HomeController@index');
 
-    Route::apiResource('categories',"CategoryController");
-    Route::apiResource('todo',"TodoController");
-    Route::get("transactions/{type?}","TransactionController@index");
+    Route::apiResource('categories', "CategoryController");
+    Route::apiResource('todo', "TodoController");
+    Route::get("transactions/{type?}", "TransactionController@index");
     Route::post('logout', 'AuthenticationController@logout');
 });
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
@@ -41,3 +43,4 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Expensereports
     Route::apiResource('expense-reports', 'ExpenseReportApiController');
 });
+Route::apiResource('sales', 'Api\V1\Admin\SalesApiController');

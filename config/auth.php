@@ -99,5 +99,10 @@ return [
             'expire'   => 60,
         ],
     ],
+    'passport' => [
+        'private_key' => storage_path('oauth-private.key'),
+        'public_key' => storage_path('oauth-public.key'),
+    ],
+
 
 ];

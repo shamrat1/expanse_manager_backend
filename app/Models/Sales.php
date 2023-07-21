@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Sales extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','date','customer_id','quantity','rate','total_amount','discount','total_payment','paid','due'];
+    protected $fillable = ['user_id','date','customer_id','company_id','quantity','rate','total_amount','discount','total_payment','paid','due'];
     public function created_by()
     {
         return $this->belongsTo(User::class);
