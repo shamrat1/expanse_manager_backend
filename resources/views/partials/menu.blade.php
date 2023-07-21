@@ -118,7 +118,7 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.sales.index') }}"
                         class="nav-link {{ request()->is('admin/sales') || request()->is('admin/sales/*') ? 'active' : '' }}">
-                        <i class="fa-fw fas fa-cart nav-icon">
+                        <i class="fa-fw fas fa-arrow-circle-right nav-icon">
 
                         </i>
                         {{ trans('cruds.sale.title') }}
