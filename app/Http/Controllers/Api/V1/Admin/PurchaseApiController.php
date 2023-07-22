@@ -2,59 +2,59 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Expense;
+use App\Models\Purchase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
-use App\Http\Requests\StoreSaleRequest;
+use App\Http\Requests\StorePurchaseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
-use App\Http\Requests\UpdateSaleRequest;
+use App\Http\Requests\UpdatePurchaseRequest;
 use App\Http\Resources\Admin\ExpenseResource;
-use App\Models\Sales;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SalesApiController extends Controller
+class PurchaseApiController extends Controller
 {
     public function index()
     {
         // abort_if(Gate::denies('expense_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseResource(Sales::with(['customer'])->paginate(20));
+        return new ExpenseResource(Purchase::paginate(20));
     }
 
-    public function store(StoreSaleRequest $request)
+    // public function store(StorePurchaseRequest $request)
+    public function store(StorePurchaseRequest $request)
     {
         $data = $request->all();
         $data["user_id"] = auth('api')->id();
-        $expense = Sales::create($data);
+        $expense = Purchase::create($data);
 
         return (new ExpenseResource($expense))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(Sales $sale)
+    public function show(Purchase $purchase)
     {
         // abort_if(Gate::denies('expense_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseResource($sale->load(['customer']));
+        return new ExpenseResource($purchase->load(['customer']));
     }
-    // public function update(UpdateSaleRequest $request, Sales $sale)
-    public function update(UpdateSaleRequest $request, Sales $sale)
+    // public function update(UpdatePurchaseRequest $request, Purchase $Purchase)
+    public function update(StorePurchaseRequest $request, Purchase $purchase)
     {
-        $sale->update($request->all());
+        $purchase->update($request->all());
 
-        return (new ExpenseResource($sale))
+        return (new ExpenseResource($purchase))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
-    public function destroy(Sales $sale)
+    public function destroy(Purchase $purchase)
     {
         //abort_if(Gate::denies('expense_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $sale->delete();
+        $purchase->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

@@ -1,7 +1,6 @@
 <?php
-use App\Http\Controllers\Api\V1\Admin\SalesApiController;
 
-// use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 
 // Route::get('/v1/api/login', '');
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User', 'middleware' => ['guest']], function () {
@@ -48,4 +47,5 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 // for local test
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'],function () {
     Route::apiResource('sales', 'SalesApiController');
+    Route::apiResource('purchases', 'PurchaseApiController');
 });
