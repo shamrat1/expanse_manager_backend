@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Http\Requests\UpdateSaleRequest;
 use App\Http\Resources\Admin\ExpenseResource;
 use App\Models\Sales;
 use Gate;
@@ -33,27 +34,27 @@ class SalesApiController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(Expense $expense)
+    public function show(Sales $sale)
     {
-        abort_if(Gate::denies('expense_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('expense_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseResource($expense->load(['category', 'created_by']));
+        return new ExpenseResource($sale->load(['customer']));
     }
-
-    public function update(UpdateExpenseRequest $request, Expense $expense)
+    // public function update(UpdateSaleRequest $request, Sales $sale)
+    public function update(UpdateSaleRequest $request, Sales $sale)
     {
-        $expense->update($request->all());
+        $sale->update($request->all());
 
-        return (new ExpenseResource($expense))
+        return (new ExpenseResource($sale))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
-    public function destroy(Expense $expense)
+    public function destroy(Sales $sale)
     {
-        abort_if(Gate::denies('expense_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        //abort_if(Gate::denies('expense_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expense->delete();
+        $sale->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

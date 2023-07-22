@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Sale;
+use App\Sales;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreSaleRequest extends FormRequest
+class UpdateSaleRequest extends FormRequest
 {
     public function authorize()
     {
-        // abort_if(Gate::denies('sale_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('expense_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +20,7 @@ class StoreSaleRequest extends FormRequest
     {
         return [
             'user_id' => [
-                'required', 'exists:users,id',
+                'null', 'exists:users,id',
             ],
             'date' => [
                 'nullable', 'date_format:' . config('panel.date_format'),
@@ -33,7 +33,7 @@ class StoreSaleRequest extends FormRequest
                 // 'exists:companies,id',
             ],
             'quantity' => [
-                'required',
+                'null',
             ],
             'rate' => [
                 'nullable',
