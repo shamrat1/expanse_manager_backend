@@ -42,10 +42,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Expensereports
     Route::apiResource('expense-reports', 'ExpenseReportApiController');
-
+    Route::apiResource('sales', 'SalesApiController');
+    Route::apiResource('purchases', 'PurchaseApiController');
+    Route::apiResource('payrolls', 'PayrollApiController');
 });
 // for local test
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'],function () {
-    Route::apiResource('sales', 'SalesApiController');
-    Route::apiResource('purchases', 'PurchaseApiController');
+    // Route::apiResource('sales', 'SalesApiController');
+    // Route::apiResource('purchases', 'PurchaseApiController');
 });
