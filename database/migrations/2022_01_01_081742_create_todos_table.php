@@ -15,15 +15,15 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('category_id')->nullable();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete()->nullable();
             $table->string('task');
             $table->string('note')->nullable();
             $table->dateTime('reminder_at')->nullable();
-            $table->unsignedInteger('created_by_id');
+            $table->foreignId('created_by_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
 
-            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            // $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

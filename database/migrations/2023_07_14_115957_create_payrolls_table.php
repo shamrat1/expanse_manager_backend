@@ -15,8 +15,8 @@ class CreatePayrollsTable extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-			$table->bigInteger('company_id')->nullable();
-            $table->bigInteger('employee_id')->nullable();
+			$table->foreignId('company_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('employee_id')->constrained()->cascadeOnDelete()->nullable();
             $table->string('month',15);
             $table->decimal('pay',15,2)->nullable();
             $table->integer('total_worked_days')->nullable();

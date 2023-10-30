@@ -15,11 +15,11 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_id')->nullable();
-            $table->integer('user_id')->nullable()->index('user_id_sales');
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->nullable();
             $table->date('date')->nullable();
             $table->string('ref', 192)->nullable();
-            $table->integer('customer_id')->nullable()->index('sale_customer_id');
+            $table->foreignId('customer_id')->constrained()->cascadeOnDelete()->nullable();
             $table->integer('quantity')->nullable();
             $table->float('rate', 10, 0)->nullable()->default(0);
             $table->float('shipping', 10, 0)->nullable()->default(0);

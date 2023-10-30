@@ -15,7 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-			$table->bigInteger('company_id')->nullable();
+			$table->foreignId('company_id')->constrained()->cascadeOnDelete()->nullable();
 			$table->string('name');
 			$table->string('email', 192)->nullable();
 			$table->integer('code')->unique()->nullable();

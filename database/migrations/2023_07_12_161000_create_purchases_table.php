@@ -15,11 +15,11 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-			$table->bigInteger('company_id')->nullable();
-            $table->bigInteger('user_id')->nullable();
+			$table->foreignId('company_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->nullable();
 			$table->date('date')->nullable();
 			$table->string('ref', 192)->nullable();
-			$table->bigInteger('supplier_id')->nullable();
+			$table->foreignId('supplier_id')->constrained()->cascadeOnDelete()->nullable();
 			$table->integer('quantity')->nullable();
 			$table->decimal('rate', 15, 0)->nullable();
 			$table->decimal('shipping', 15, 0)->nullable();

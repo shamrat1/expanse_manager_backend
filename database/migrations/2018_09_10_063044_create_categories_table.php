@@ -14,13 +14,13 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
 
             $table->string('name')->nullable();
 
             $table->string('type'); // income, expanse and todo
 
-            $table->unsignedInteger('created_by_id')->nullable();
+            $table->foreignId('created_by_id')->constrained('users')->cascadeOnDelete()->nullable();
 
             $table->timestamps();
 
@@ -36,7 +36,10 @@ class CreateCategoriesTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
+        Schema::table('categories',function (Blueprint $table){
+            $table->dropForeign(['created_by_id']);
+        });
         Schema::dropIfExists('categories');
     }
 }

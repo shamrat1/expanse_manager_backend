@@ -9,7 +9,7 @@ class CreateIncomesTable extends Migration
     public function up()
     {
         Schema::create('incomes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
 
             $table->date('entry_date')->nullable();
 
